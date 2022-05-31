@@ -23,8 +23,8 @@
       </ul> -->
       <!-- Joseph Added this  -->
 
-      <button id="deleteBtn" class="btn" onclick="deleteUser()">
-        Delete User
+      <button id="deleteBtn" class="btn" onclick="popUser()">
+        Pop User
       </button>
 
       <a href="index.html" class="btn">Home</a>
@@ -58,26 +58,14 @@
         }
       }
 
-      function deleteUser() {
+      function popUser() {
         userList.pop();
         localStorage.setItem("userList", JSON.stringify(userList));
-        displayNewList();
+        displayList();
       }
 
-      function displayNewList() {
-        if (localStorage.getItem("userList") != null) {
-          userList = JSON.parse(localStorage.getItem("userList"));
-        }
-        users.innerHTML = "";
-        for (let i = 0; i < userList.length; i++) {
-          const li = document.createElement("li");
-          li.appendChild(
-            document.createTextNode(`${userList[i].name} 
-        : ${userList[i].email}`)
-          );
-          users.appendChild(li);
-        }
-      }
+
+      
     </script>
   </body>
 </html>

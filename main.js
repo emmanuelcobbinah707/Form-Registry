@@ -2,9 +2,7 @@ const myForm = document.querySelector('#my-form');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const msg = document.querySelector('.msg');
-const users = document.querySelector('.users');
-const deleteBtn = document.querySelector('#deleteBtn');
-
+const users = document.querySelector('#users');
 let userList = [];
 
 myForm.addEventListener('submit', onSubmit);
@@ -32,6 +30,12 @@ function addUser() {
     displayList();
 }
 
+function deleteUser(i){
+    userList.splice(i, 1)
+    localStorage.setItem("userList", JSON.stringify(userList));
+    displayList();
+}
+
 function displayList() {
     if(localStorage.getItem("userList")!=null){
         userList = JSON.parse(localStorage.getItem("userList"))
@@ -39,27 +43,8 @@ function displayList() {
     users.innerHTML = '';
     for (let i = 0; i < userList.length; i++) {
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${userList[i].name} 
-        : ${userList[i].email}`));
-        users.appendChild(li);
-    }
-}
-
-function deleteUser() {
-  userList.pop();
-  localStorage.setItem("userList", JSON.stringify(userList))
-  displayNewList();
-}
-
-function displayNewList() {
-    if(localStorage.getItem("userList")!=null){
-        userList = JSON.parse(localStorage.getItem("userList"))
-    }
-    users.innerHTML = '';
-    for (let i =0; i < userList.length; i++) {
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${userList[i].name} 
-        : ${userList[i].email}`));
+        let content = "<div>"+userList[i].name+" - "+userList[i].email+"<button class=\"btn\" onclick=\"deleteUser("+i+")\">Delete</button></div>";
+        li.innerHTML = content;
         users.appendChild(li);
     }
 }
