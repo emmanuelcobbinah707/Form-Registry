@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS For Beginners</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>JS For Beginners</h1>
+    </header>
+
+    <section class="container">
+      <h3>Users</h3>
+      <ul class="users"></ul>
+
+      <!-- <ul class="items">
+        <li class="item">Item 1</li>
+        <li class="item">Item 2</li>
+        <li class="item">Item 3</li>
+      </ul> -->
+      <!-- Joseph Added this  -->
+
+      <button id="deleteBtn" class="btn" onclick="deleteUser()">
+        Delete User
+      </button>
+
+      <a href="index.html" class="btn">Home</a>
+    </section>
+
+    <script>
+      const myForm = document.querySelector("#my-form");
+      const nameInput = document.querySelector("#name");
+      const emailInput = document.querySelector("#email");
+      const msg = document.querySelector(".msg");
+      const users = document.querySelector(".users");
+      const deleteBtn = document.querySelector("#deleteBtn");
+
+      let userList = [];
+      // uploadUser()
+
+      displayList();
+
+      function displayList() {
+        if (localStorage.getItem("userList") != null) {
+          userList = JSON.parse(localStorage.getItem("userList"));
+        }
+        users.innerHTML = "";
+        for (let i = 0; i < userList.length; i++) {
+          const li = document.createElement("li");
+          li.appendChild(
+            document.createTextNode(`${userList[i].name} 
+        : ${userList[i].email}`)
+          );
+          users.appendChild(li);
+        }
+      }
+
+      function deleteUser() {
+        userList.pop();
+        localStorage.setItem("userList", JSON.stringify(userList));
+        displayNewList();
+      }
+
+      function displayNewList() {
+        if (localStorage.getItem("userList") != null) {
+          userList = JSON.parse(localStorage.getItem("userList"));
+        }
+        users.innerHTML = "";
+        for (let i = 0; i < userList.length; i++) {
+          const li = document.createElement("li");
+          li.appendChild(
+            document.createTextNode(`${userList[i].name} 
+        : ${userList[i].email}`)
+          );
+          users.appendChild(li);
+        }
+      }
+    </script>
+  </body>
+</html>
