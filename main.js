@@ -43,7 +43,14 @@ function displayList() {
     users.innerHTML = '';
     for (let i = 0; i < userList.length; i++) {
         const li = document.createElement('li');
-        let content = "<div>"+userList[i].name+" - "+userList[i].email+"<button class=\"btn\" onclick=\"deleteUser("+i+")\">Delete</button></div>";
+        // let content ='<div>Joseph Cobbinah - joseph.cobbinah÷@gmail.com <button class="btn" onclick="deleteUser(0)"></button></div>';
+        let content = '<div>'+
+        userList[i].name+
+        ' - '+
+        userList[i].email+
+        '<button class="btn" onclick="deleteUser('+
+        i+
+        ')">Delete</button></div>';
         li.innerHTML = content;
         users.appendChild(li);
     }
